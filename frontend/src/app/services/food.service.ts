@@ -10,19 +10,27 @@ export class FoodService {
 
   constructor() { }
   
-  getAll(): Food[] {
+  getAllFoods(): Food[] {
     return sample_foods
   }
 
   getAllFoodsBySearchTerm(search: string) {
-    return this.getAll().filter(food => food.name.toLowerCase().includes(search.toLowerCase()))
+    return this.getAllFoods().filter(food => food.name.toLowerCase().includes(search.toLowerCase()))
   }
 
   getFoodById(foodId: string): Food {
-    return this.getAll().find(food => food.id === foodId) ?? new Food();
+    return this.getAllFoods().find(food => food.id === foodId) ?? new Food();
   }
 
-  getAllFoodByAllTag(): Tag[] {
+  getAllTags(): Tag[] {
     return sample_tags
+  }
+
+  getFoodsByTag(tag: string): Food[] {
+    if(tag === 'All') {
+      return this.getAllFoods()
+    } else {
+      return this.getAllFoods().filter(food => food.tags?.includes(tag))
+    }
   }
 }

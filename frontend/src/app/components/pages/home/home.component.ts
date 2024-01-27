@@ -18,8 +18,10 @@ export class HomeComponent {
     activatedRoute.params.subscribe((params) => {
       if (params['searchTerm']) {
         this.foods = this.foodService.getAllFoodsBySearchTerm(params['searchTerm'])
+      } else if (params['tag']) {
+        this.foods = this.foodService.getFoodsByTag(params['tag']);
       } else {
-        this.foods = foodService.getAll();
+        this.foods = foodService.getAllFoods();
       }
     })
   }
